@@ -1,4 +1,4 @@
-﻿[返回主页](./)
+﻿[返回主页](https://division2buildtool.github.io/)
 
 ## 软件使用简介
 

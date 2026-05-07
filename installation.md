@@ -1,4 +1,4 @@
-[返回主页](./)
+[返回主页](https://division2buildtool.github.io/)
 
 ### Windows系统安装说明
 - 如果之前安装过软件，直接双击安装包文件.msix 以安装应用。
