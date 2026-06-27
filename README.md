@@ -1,13 +1,32 @@
-﻿《全境封锁2配装工具》是为游戏[《全境封锁2》](https://www.ubisoft.com/en-us/game/the-division/the-division-2)
-开发的第三方工具软件，采用.NET MAUI框架，在Android、Windows、iOS、macOS上构建并发布应用。
+﻿# 全境封锁2 配装工具 (Division 2 Build Tool)
+<!--
+[![Release Download](https://img.shields.io/github/downloads/Division2BuildTool/division2buildtool.github.io/total?style=flat-square)](https://github.com/Division2BuildTool/division2buildtool.github.io/releases)
+-->
+[![GitHub release](https://img.shields.io/github/v/release/Division2BuildTool/division2buildtool.github.io)](https://github.com/Division2BuildTool/division2buildtool.github.io/releases)
+[![.NET](https://img.shields.io/badge/.NET-8.0-purple)](https://dotnet.microsoft.com/)
+[![MAUI](https://img.shields.io/badge/MAUI-8.0.82-blue)](https://dotnet.microsoft.com/apps/maui)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat&logo=android&logoColor=white)
+![Windows](https://badgen.net/badge/icon/Windows?icon=windows&color=0078D6&labelColor=0078D6&label)
+![iOS](https://img.shields.io/badge/iOS-000000?style=flat&logo=apple&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-000000?style=flat&logo=apple&logoColor=white)
+
+一款为《汤姆克兰西：全境封锁2》(Tom Clancy's The Division 2) 打造的配装模拟与计算工具，支持 Android、Windows、iOS、macOS 多平台运行，支持中文、English。
 
 ## 主要功能
 
-1.  模拟配装与数据计算 
-2.  游戏相关数据展示（包括武器数据、品牌加成、天赋列表、装备搜索、玩家数据查询等功能） 
-
-## 软件界面
+### 配装系统
+装备、词条、配件、天赋、专长、技能、手表、原型、精通等可按游戏内设定自由搭配
 ![桌面端界面](/img/screenshot.png) 
+
+### 数据计算
+包括DPS计算、单发伤害计算(包括猎头)、各类天赋加成、攻击防御技能属性计算
+
+### 配装保存
+保存/加载配装自己的配装、QR码/链接/文件/截图分享配装、内置配装模板
+
+### 数据查询
+装备搜索、武器数据、品牌加成、天赋列表、奇特具名、玩家数据查询
+
 
 ## 软件使用
 详见[软件使用简介](https://division2buildtool.github.io/introduction)
@@ -74,6 +93,11 @@ macOS         | macOS 10.15                    |macOS 11
 * [ASP.NET Core Blazor - MIT License](https://github.com/dotnet/aspnetcore)
 * [CommunityToolkit.Maui - MIT License](https://github.com/CommunityToolkit/Maui)
 * [CommunityToolkit.Mvvm - MIT License](https://github.com/CommunityToolkit/dotnet)
+* [SkiaSharp - MIT License](https://github.com/mono/SkiaSharp)
 * [LocalizationResourceManager.Maui - MIT License](https://github.com/SirJohnK/LocalizationResourceManager.Maui)
 * [Mopups - BSD-3-Clause License](https://github.com/LuckyDucko/Mopups)
 * [Newtonsoft.Json - MIT License](https://github.com/JamesNK/Newtonsoft.Json)
+* [ZXing.Net - Apache License](https://github.com/micjahn/ZXing.Net/)
+* [QRCoder - MIT License](https://github.com/Shane32/QRCoder)
+
+本软件为个人开发作品，仅供学习交流使用。游戏数据和素材版权归 Ubisoft 所有。
