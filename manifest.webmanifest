@@ -1,0 +1,26 @@
+{
+    "name": "全境封锁2配装工具",
+    "short_name": "配装工具",
+    "description": "非官方《全境封锁2》配装编辑与伤害计算工具",
+    "lang": "zh-CN",
+    "start_url": "./build",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#0d0d0d",
+    "theme_color": "#0d0d0d",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
