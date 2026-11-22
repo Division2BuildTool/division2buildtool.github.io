@@ -1,0 +1,359 @@
+@font-face {
+    font-family: 'Division';
+    src: url('fonts/HKYTW3_Borda.ttf') format('truetype');
+    font-display: swap;
+}
+
+:root {
+    --bg: #0d0d0d;
+    --panel: #151515;
+    --panel-2: #1b1b1b;
+    --border: #2c2c2c;
+    --text: #f2f2f2;
+    --muted: #9a9a9a;
+    --accent: #ff6d10;
+    --gold: #ea9b24;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Division', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 22px;
+    background: linear-gradient(180deg, #191919, #101010);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand-mark {
+    width: 6px;
+    height: 38px;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(255, 109, 16, 0.6);
+}
+
+.brand-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.brand-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.app-nav {
+    margin-left: auto;
+}
+
+.app-nav a {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 14px;
+    border: 1px solid transparent;
+}
+
+.app-nav a.active {
+    color: var(--accent);
+    border-color: rgba(255, 109, 16, 0.5);
+    background: rgba(255, 109, 16, 0.08);
+}
+
+.app-main {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 22px 18px 40px;
+    flex: 1;
+}
+
+.weapon-page {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.page-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.page-intro h1 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 3px;
+    outline: none;
+}
+
+.page-intro p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.stat-chip {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    padding: 6px 12px;
+    color: var(--accent);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.filter-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    align-items: center;
+}
+
+.check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.check input {
+    accent-color: var(--accent);
+    width: 15px;
+    height: 15px;
+}
+
+.action {
+    margin-left: auto;
+    background: var(--accent);
+    color: #111;
+    border: 0;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.action:hover {
+    filter: brightness(1.1);
+}
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    background: var(--panel);
+}
+
+.weapon-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 760px;
+}
+
+.weapon-table th,
+.weapon-table td {
+    padding: 9px 10px;
+    text-align: right;
+    border-bottom: 1px solid #232323;
+    white-space: nowrap;
+}
+
+.weapon-table th:first-child,
+.weapon-table td:first-child {
+    text-align: left;
+}
+
+.weapon-table thead th {
+    position: sticky;
+    top: 0;
+    background: #191919;
+    z-index: 1;
+    font-weight: normal;
+    color: var(--muted);
+}
+
+.weapon-table tbody tr:hover {
+    background: var(--panel-2);
+}
+
+.sort {
+    background: none;
+    border: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sort:hover,
+.sort.active {
+    color: var(--accent);
+}
+
+.name-col {
+    width: 38%;
+}
+
+.name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weapon-icon {
+    width: 64px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.name-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.weapon-name {
+    font-size: 14px;
+}
+
+.weapon-meta {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 28px 0 !important;
+}
+
+.page-foot {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+#blazor-error-ui {
+    background: #2a1414;
+    color: #ffb4b4;
+    border-top: 1px solid #5a2020;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.loading-progress {
+    position: relative;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    margin: 20vh auto 1rem auto;
+}
+
+.loading-progress circle {
+    fill: none;
+    stroke: #333;
+    stroke-width: 0.6rem;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+}
+
+.loading-progress circle:last-child {
+    stroke: var(--accent);
+    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+    transition: stroke-dasharray 0.05s ease-in-out;
+}
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+.loading-progress-text:after {
+    content: var(--blazor-load-percentage-text, "Loading");
+}
+
+@media (max-width: 720px) {
+    .app-main {
+        padding: 16px 10px 30px;
+    }
+
+    .page-intro {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-intro h1 {
+        font-size: 22px;
+    }
+
+    .action {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .weapon-table {
+        min-width: 680px;
+    }
+
+    .weapon-icon {
+        width: 52px;
+        height: 20px;
+    }
+}
