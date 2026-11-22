@@ -1,5 +1,5 @@
 // 网页版离线支持：预缓存应用外壳，离线时回退到缓存的 index.html
-const CACHE_VERSION = "v3";
+const CACHE_VERSION = "v19";
 const SHELL_CACHE = `d2bt-shell-${CACHE_VERSION}`;
 const ASSET_CACHE = `d2bt-assets-${CACHE_VERSION}`;
 const SHELL_PREFIX = "d2bt-";
@@ -13,7 +13,7 @@ const SHELL_FILES = [
     "css/app.css",
     "js/platform.js",
     "manifest.webmanifest",
-    "favicon.png",
+    "favicon-app.png",
     "icon-192.png",
     "icon-512.png",
     "fonts/HKYTW3_Borda.ttf",

@@ -65,11 +65,12 @@ a {
     z-index: 10;
 }
 
-.brand-mark {
-    width: 6px;
-    height: 38px;
-    background: var(--accent);
-    box-shadow: 0 0 12px rgba(255, 109, 16, 0.6);
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex: none;
+    filter: drop-shadow(0 0 8px rgba(255, 109, 16, 0.35));
 }
 
 .brand-title {
@@ -1286,7 +1287,8 @@ input {
         flex-wrap: wrap;
     }
 
-    .brand-mark {
+    .brand-logo {
+        width: 30px;
         height: 30px;
     }
 
@@ -1567,4 +1569,663 @@ input {
     .site-foot {
         gap: 6px 16px;
     }
+}
+
+/* ===== 配装页视觉改进（参考桌面客户端） ===== */
+.build-page {
+    gap: 14px;
+}
+
+.build-intro {
+    align-items: center;
+    padding: 4px 2px 0;
+}
+
+.build-intro h1 {
+    color: var(--accent);
+    text-shadow: 0 0 18px rgba(255, 109, 16, 0.25);
+}
+
+.build-intro p {
+    color: #9a9a9a;
+}
+
+.build-toolbar {
+    background:
+        linear-gradient(180deg, rgba(255, 109, 16, 0.07), transparent 55%),
+        var(--panel);
+    border-color: #333;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.toolbar-label {
+    color: #8f8f8f;
+    letter-spacing: 1px;
+}
+
+.build-toolbar select,
+.build-toolbar input[type="text"],
+.quick-grid select,
+.param-grid select,
+.param-grid input,
+.item-row select,
+.item-row input {
+    background: #0f0f0f;
+    border-color: #333;
+}
+
+.build-toolbar select:hover,
+.item-row select:hover {
+    border-color: #4a4a4a;
+}
+
+button.action {
+    background: linear-gradient(180deg, #ff822f, #e85f05);
+    border-color: #ff8a3d;
+    box-shadow: 0 4px 16px rgba(255, 109, 16, 0.22);
+    font-weight: 600;
+}
+
+button.action:hover {
+    filter: brightness(1.08);
+    color: #111;
+}
+
+button.ghost {
+    background: #171717;
+}
+
+.column-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    color: #dadada;
+}
+
+.column-title::before {
+    content: "";
+    width: 3px;
+    height: 14px;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(255, 109, 16, 0.55);
+}
+
+.slot-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #7d7d7d;
+}
+
+.item-card {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--item-color, var(--accent));
+    background: var(--panel);
+    background:
+        linear-gradient(100deg, color-mix(in srgb, var(--item-color, #ff6d10) 15%, transparent), transparent 58%),
+        linear-gradient(180deg, #191919, #131313);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 20px rgba(0, 0, 0, 0.22);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.item-card:hover {
+    border-color: color-mix(in srgb, var(--item-color, #ff6d10) 55%, #2c2c2c);
+    transform: translateY(-1px);
+}
+
+.item-head {
+    border-bottom-color: color-mix(in srgb, var(--item-color, #ff6d10) 22%, #2c2c2c);
+}
+
+.item-icon {
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.item-card-weapon .item-icon {
+    width: 78px;
+    height: 34px;
+}
+
+.item-name {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.item-sub {
+    color: #979797;
+}
+
+.mini-button {
+    background: #111;
+}
+
+.item-rows {
+    gap: 5px;
+}
+
+.row-label {
+    width: 46px;
+    color: #9d9d9d;
+}
+
+.item-tip {
+    color: #8c8c8c;
+    padding-left: 48px;
+}
+
+.skill-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.skill-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 8px 10px;
+    background: linear-gradient(180deg, #191919, #121212);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    font-size: 12px;
+}
+
+.skill-card img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex: none;
+}
+
+.skill-card span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.side-tabs {
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    background: #0e0e0e;
+    border: 1px solid var(--border);
+}
+
+.side-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+    background: transparent;
+    color: var(--muted);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.side-tab:hover {
+    color: var(--text);
+    background: #191919;
+}
+
+.side-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: rgba(255, 109, 16, 0.09);
+}
+
+.panel {
+    background: linear-gradient(180deg, #171717, #111111);
+    border-color: #303030;
+    padding: 13px 14px;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #e6e6e6;
+}
+
+.panel-title::before {
+    content: "";
+    width: 3px;
+    height: 13px;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(255, 109, 16, 0.5);
+}
+
+.data-panel {
+    border-color: rgba(255, 109, 16, 0.42);
+}
+
+.quick-panel {
+    border-color: rgba(180, 180, 180, 0.28);
+}
+
+.param-panel {
+    border-color: rgba(255, 100, 100, 0.26);
+}
+
+.build-panel,
+.share-panel {
+    border-color: rgba(110, 160, 255, 0.26);
+}
+
+.result-grid {
+    gap: 0 16px;
+}
+
+.result-cell {
+    padding: 6px 2px;
+    background: transparent;
+    border-bottom: 1px solid #272727;
+    font-variant-numeric: tabular-nums;
+}
+
+.result-cell strong {
+    font-size: 12.5px;
+}
+
+@media (min-width: 901px) {
+    .side-column {
+        position: sticky;
+        top: 88px;
+        max-height: calc(100vh - 104px);
+        overflow-y: auto;
+        padding-right: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: #3a3a3a transparent;
+    }
+
+    .side-column::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .side-column::-webkit-scrollbar-thumb {
+        background: #3a3a3a;
+        border-radius: 3px;
+    }
+}
+
+@media (max-width: 900px) {
+    .side-tabs {
+        overflow-x: auto;
+    }
+
+    .side-tab {
+        flex: none;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 720px) {
+    .build-intro {
+        padding-top: 0;
+    }
+
+    .build-grid {
+        gap: 12px;
+    }
+
+    .panel {
+        padding: 10px 12px;
+    }
+
+    .item-card-weapon .item-icon {
+        width: 64px;
+        height: 30px;
+    }
+
+    .skill-cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* 配装卡片内的选择框与输入框使用透明背景 */
+.item-row select,
+.item-row input {
+    background: transparent;
+}
+
+.item-row select option {
+    background: #1b1b1b;
+    color: var(--text);
+}
+
+/* ===== 装备双列与武器属性/配件分栏 ===== */
+.gear-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.gear-grid .slot {
+    min-width: 0;
+}
+
+.gear-grid .item-head {
+    flex-wrap: wrap;
+    row-gap: 6px;
+}
+
+.gear-grid .item-actions {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.item-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.attr-rows,
+.mod-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.item-rows-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 18px;
+    align-items: start;
+}
+
+.item-rows-split .mod-rows {
+    padding-left: 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.item-rows-split .row-label {
+    width: 44px;
+}
+
+.item-rows-split .row-value {
+    width: 64px;
+}
+
+.item-rows-split .item-tip {
+    padding-left: 0;
+}
+
+.item-rows-split .item-row select,
+.gear-grid .item-row select {
+    min-width: 0;
+}
+
+.gear-grid .row-label {
+    width: 42px;
+}
+
+.gear-grid .item-row .row-value {
+    width: 62px;
+}
+
+@media (max-width: 720px) {
+    .gear-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .item-rows-split {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .item-rows-split .mod-rows {
+        padding-left: 0;
+        padding-top: 6px;
+        border-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* ===== 天赋说明改为悬停显示 ===== */
+.item-card {
+    position: relative;
+}
+
+.item-card:hover {
+    z-index: 5;
+}
+
+.talent-block {
+    position: relative;
+}
+
+.talent-block .item-tip.talent-tip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 60;
+    width: max-content;
+    max-width: min(320px, 80vw);
+    padding: 8px 10px;
+    background: #1b1b1b;
+    border: 1px solid #4a4a4a;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+    color: #d6d6d6;
+    line-height: 1.55;
+    white-space: normal;
+}
+
+.talent-block:hover .item-tip.talent-tip,
+.talent-block:focus-within .item-tip.talent-tip {
+    display: block;
+}
+
+/* ===== 技能卡片选择 ===== */
+button.skill-card {
+    width: 100%;
+    min-width: 0;
+    color: var(--text);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+button.skill-card:hover,
+button.skill-card:focus-visible {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, #1d1d1d, #141414);
+}
+
+.picker-item.active {
+    border-color: var(--accent);
+    background: rgba(255, 109, 16, 0.12);
+}
+
+/* ===== 工具栏分行与武器显示开关 ===== */
+.toolbar-group-break {
+    flex-basis: 100%;
+}
+
+.weapon-visibility {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.weapon-visibility .check {
+    white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+    .weapon-visibility {
+        margin-left: 0;
+    }
+}
+
+/* ===== 精简配装主界面 ===== */
+.item-pick {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.item-pick .item-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item-pick:hover .item-name,
+.item-pick:focus-visible .item-name {
+    color: var(--accent);
+}
+
+.gear-grid {
+    margin-top: 2px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.skill-cards {
+    margin-top: 2px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ===== 装备卡片头部保持单行 ===== */
+.item-head,
+.gear-grid .item-head {
+    flex-wrap: nowrap;
+}
+
+.item-actions,
+.gear-grid .item-actions {
+    width: auto;
+    flex: none;
+}
+
+/* ===== 武器与装备始终双列 ===== */
+.weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.gear-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 720px) {
+    .weapon-grid,
+    .gear-grid {
+        gap: 8px;
+    }
+
+    .weapon-grid .item-card,
+    .gear-grid .item-card {
+        padding: 8px;
+    }
+
+    .weapon-grid .row-label,
+    .gear-grid .row-label {
+        width: 30px;
+        font-size: 10px;
+    }
+
+    .weapon-grid .item-row .row-value,
+    .gear-grid .item-row .row-value {
+        width: 44px;
+    }
+
+    .weapon-grid .item-icon {
+        width: 40px;
+        height: 20px;
+    }
+
+    .gear-grid .item-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .weapon-grid .item-name,
+    .gear-grid .item-name {
+        font-size: 12px;
+    }
+}
+
+/* ===== 武器单列卡片内部分栏，装备保持双列 ===== */
+.weapon-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.weapon-grid .item-row .row-select,
+.gear-grid .item-row .row-select {
+    flex: 2 1 0;
+    min-width: 0;
+}
+
+.weapon-grid .item-row .row-value,
+.gear-grid .item-row .row-value {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 38px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+@media (max-width: 720px) {
+    .item-rows-split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .item-rows-split .mod-rows {
+        padding-left: 12px;
+        padding-top: 0;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 0;
+    }
+
+    .weapon-grid .row-label {
+        width: 40px;
+        font-size: 10px;
+    }
+
+    .gear-grid .row-label {
+        width: 28px;
+        font-size: 9px;
+    }
+
+    .weapon-grid .item-icon {
+        width: 64px;
+        height: 30px;
+    }
+
+    .weapon-grid .item-name {
+        font-size: 13px;
+    }
+}
+
+/* ===== 技能卡始终双列 ===== */
+.skill-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
