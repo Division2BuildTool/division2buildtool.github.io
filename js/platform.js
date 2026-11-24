@@ -185,14 +185,147 @@ window.d2bt = {
 
     applySettings: function () {
         try {
+            const font = String(d2bt.getSetting("FontInt", 0));
+            document.documentElement.setAttribute("data-font", font);
+
             const background = String(d2bt.getSetting("BackgroundColorInt", 1));
             document.documentElement.setAttribute("data-bg", background);
 
-            const zoomMap = { "2": 1.1, "1": 1.05, "0": 1, "-1": 0.95, "-2": 0.9 };
-            const zoom = zoomMap[String(d2bt.getSetting("FontSizeIndex", 0))] ?? 1;
-            document.documentElement.style.zoom = String(zoom);
+            const twoColumn = d2bt.getSetting("TwoColumnLayout", true);
+            document.documentElement.setAttribute("data-layout", String(twoColumn) === "false" ? "single" : "two");
+
+            const scaleMap = { "2": 1.1, "1": 1.05, "0": 1, "-1": 0.95, "-2": 0.9 };
+            const scale = scaleMap[String(d2bt.getSetting("FontSizeIndex", 0))] ?? 1;
+            document.documentElement.style.removeProperty("zoom");
+            document.documentElement.style.setProperty("--font-scale", String(scale));
         } catch (e) {
             console.warn("d2bt.applySettings", e);
+        }
+    },
+
+    // 按需加载第三方脚本，避免首屏加载体积
+    loadScript: function (src) {
+        d2bt._scripts = d2bt._scripts || {};
+        if (d2bt._scripts[src]) {
+            return d2bt._scripts[src];
+        }
+        d2bt._scripts[src] = new Promise(function (resolve, reject) {
+            const script = document.createElement("script");
+            script.src = new URL(src, document.baseURI).toString();
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = function () {
+                reject(new Error("script load failed: " + src));
+            };
+            document.head.appendChild(script);
+        });
+        return d2bt._scripts[src];
+    },
+
+    captureBuildImage: async function (selector, hideSelectors) {
+        try {
+            if (typeof htmlToImage === "undefined" || typeof htmlToImage.toPng !== "function") {
+                await d2bt.loadScript("js/html-to-image.js");
+            }
+            const element = document.querySelector(selector);
+            if (!element || typeof htmlToImage === "undefined") {
+                return "";
+            }
+            const background = (getComputedStyle(document.documentElement).getPropertyValue("--bg") || "#0d0d0d").trim();
+            const hides = hideSelectors || [];
+            const dataUrl = await htmlToImage.toPng(element, {
+                backgroundColor: background,
+                pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+                cacheBust: true,
+                width: element.scrollWidth,
+                height: element.scrollHeight,
+                filter: function (node) {
+                    if (!node || typeof node.matches !== "function") {
+                        return true;
+                    }
+                    return !hides.some(function (hide) {
+                        return node.matches(hide);
+                    });
+                }
+            });
+            return dataUrl || "";
+        } catch (e) {
+            console.warn("d2bt.captureBuildImage", e);
+            return "";
+        }
+    },
+
+    saveBuildImage: async function (selector, hideSelectors) {
+        try {
+            const dataUrl = await d2bt.captureBuildImage(selector, hideSelectors);
+            if (!dataUrl) {
+                return false;
+            }
+            const now = new Date();
+            const pad = function (value) {
+                return String(value).padStart(2, "0");
+            };
+            const name = "TD2Build"
+                + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate())
+                + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds())
+                + ".png";
+            const link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = name;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            return true;
+        } catch (e) {
+            console.warn("d2bt.saveBuildImage", e);
+            return false;
+        }
+    },
+
+    copyBuildImage: async function (selector, hideSelectors) {
+        try {
+            if (!navigator.clipboard || !window.ClipboardItem) {
+                return false;
+            }
+            const dataUrl = await d2bt.captureBuildImage(selector, hideSelectors);
+            if (!dataUrl) {
+                return false;
+            }
+            const response = await fetch(dataUrl);
+            const blob = await response.blob();
+            await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+            return true;
+        } catch (e) {
+            console.warn("d2bt.copyBuildImage", e);
+            return false;
+        }
+    },
+
+    decodeQrImage: async function (dataUrl) {
+        try {
+            if (typeof jsQR !== "function") {
+                await d2bt.loadScript("js/jsQR.js");
+            }
+            if (typeof jsQR !== "function") {
+                return "";
+            }
+            const image = new Image();
+            await new Promise(function (resolve, reject) {
+                image.onload = resolve;
+                image.onerror = reject;
+                image.src = dataUrl;
+            });
+            const canvas = document.createElement("canvas");
+            canvas.width = image.naturalWidth || image.width;
+            canvas.height = image.naturalHeight || image.height;
+            const context = canvas.getContext("2d", { willReadFrequently: true });
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(pixels.data, pixels.width, pixels.height, { inversionAttempts: "attemptBoth" });
+            return code && code.data ? code.data : "";
+        } catch (e) {
+            console.warn("d2bt.decodeQrImage", e);
+            return "";
         }
     },
 
@@ -200,9 +333,94 @@ window.d2bt = {
         location.reload();
     },
 
+    // 配装页全局快捷键：由页面注册，离开页面时注销
+    registerShortcuts: function (dotNetRef) {
+        d2bt.unregisterShortcuts();
+        d2bt._shortcutRef = dotNetRef;
+        d2bt._shortcutHandler = function (event) {
+            if (event.repeat) {
+                return;
+            }
+            const target = event.target;
+            const tag = target && target.tagName ? target.tagName.toLowerCase() : "";
+            const typing = tag === "input" || tag === "select" || tag === "textarea" || (target && target.isContentEditable);
+            const send = function (action) {
+                try {
+                    dotNetRef.invokeMethodAsync("OnShortcut", action);
+                } catch (e) {
+                    console.warn("d2bt.shortcut", e);
+                }
+            };
+
+            if (event.key === "Escape") {
+                send("escape");
+                return;
+            }
+            if (typing || event.metaKey) {
+                return;
+            }
+            if (event.altKey) {
+                if (event.key >= "1" && event.key <= "3") {
+                    event.preventDefault();
+                    send("calc:" + (Number(event.key) - 1));
+                }
+                return;
+            }
+            if (event.ctrlKey) {
+                if (event.key.toLowerCase() === "s") {
+                    event.preventDefault();
+                    send("save");
+                }
+                return;
+            }
+
+            const key = event.key;
+            const lower = key.toLowerCase();
+            const digit = /^Digit([1-3])$/.exec(event.code || "");
+            if (digit) {
+                event.preventDefault();
+                const index = Number(digit[1]) - 1;
+                send((event.shiftKey ? "weapon:" : "select:") + index);
+                return;
+            }
+
+            const pickMap = { q: 0, w: 1, a: 2, s: 3, z: 4, x: 5 };
+            if (Object.prototype.hasOwnProperty.call(pickMap, lower)) {
+                event.preventDefault();
+                send("pick:" + pickMap[lower]);
+                return;
+            }
+            if (/^F[1-4]$/.test(key)) {
+                event.preventDefault();
+                send("tab:" + (Number(key.slice(1)) - 1));
+                return;
+            }
+            if (key === "?" || (key === "/" && event.shiftKey)) {
+                event.preventDefault();
+                send("help");
+            }
+        };
+        document.addEventListener("keydown", d2bt._shortcutHandler);
+    },
+
+    unregisterShortcuts: function () {
+        if (d2bt._shortcutHandler) {
+            document.removeEventListener("keydown", d2bt._shortcutHandler);
+            d2bt._shortcutHandler = null;
+        }
+        d2bt._shortcutRef = null;
+    },
+
     // 注册离线 Service Worker；地址基于 <base href> 解析，兼容 / 与 /web/ 子路径
     registerServiceWorker: function () {
         if (!("serviceWorker" in navigator)) {
+            return;
+        }
+        // 本地调试禁用离线缓存：旧缓存会让 launch.json 启动后仍看到上一次的页面样式
+        if (/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(location.hostname)) {
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+                regs.forEach(function (reg) { reg.unregister(); });
+            }).catch(function () { });
             return;
         }
         window.addEventListener("load", function () {

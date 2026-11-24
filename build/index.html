@@ -16,6 +16,23 @@
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link href="Division2BuildTool.Web.styles.css" rel="stylesheet" />
+    <script>
+        // 首屏前应用字体设置，避免软件字体回退导致的闪烁
+        try {
+            var rawFont = localStorage.getItem("d2bt.FontInt");
+            var fontIndex = rawFont === null ? 0 : JSON.parse(rawFont);
+            document.documentElement.setAttribute("data-font", String(fontIndex));
+
+            var rawLayout = localStorage.getItem("d2bt.TwoColumnLayout");
+            var twoColumn = rawLayout === null ? true : JSON.parse(rawLayout);
+            document.documentElement.setAttribute("data-layout", String(twoColumn) === "false" ? "single" : "two");
+
+            var rawSize = localStorage.getItem("d2bt.FontSizeIndex");
+            var sizeIndex = rawSize === null ? 0 : JSON.parse(rawSize);
+            var scaleMap = { "2": "1.1", "1": "1.05", "0": "1", "-1": "0.95", "-2": "0.9" };
+            document.documentElement.style.setProperty("--font-scale", scaleMap[String(sizeIndex)] || "1");
+        } catch (e) { }
+    </script>
 </head>
 
 <body>
