@@ -411,6 +411,42 @@ window.d2bt = {
         d2bt._shortcutRef = null;
     },
 
+    // 页面隐藏或关闭时同步保存当前配装草稿；引用由页面创建和释放，这里只管理监听器。
+    registerPageSave: function (dotNetRef) {
+        d2bt.unregisterPageSave();
+        d2bt._pageSaveRef = dotNetRef;
+        d2bt._pageSaveHandler = function () {
+            const target = d2bt._pageSaveRef;
+            if (!target) {
+                return;
+            }
+            try {
+                target.invokeMethod("SaveDraftSync");
+            } catch (e) {
+                console.warn("d2bt.pageSave", e);
+            }
+        };
+        d2bt._pageSaveVisibilityHandler = function () {
+            if (document.visibilityState === "hidden") {
+                d2bt._pageSaveHandler();
+            }
+        };
+        window.addEventListener("pagehide", d2bt._pageSaveHandler);
+        document.addEventListener("visibilitychange", d2bt._pageSaveVisibilityHandler);
+    },
+
+    unregisterPageSave: function () {
+        if (d2bt._pageSaveHandler) {
+            window.removeEventListener("pagehide", d2bt._pageSaveHandler);
+            d2bt._pageSaveHandler = null;
+        }
+        if (d2bt._pageSaveVisibilityHandler) {
+            document.removeEventListener("visibilitychange", d2bt._pageSaveVisibilityHandler);
+            d2bt._pageSaveVisibilityHandler = null;
+        }
+        d2bt._pageSaveRef = null;
+    },
+
     // 注册离线 Service Worker；地址基于 <base href> 解析，兼容 / 与 /web/ 子路径
     registerServiceWorker: function () {
         if (!("serviceWorker" in navigator)) {

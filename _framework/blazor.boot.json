@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Division2BuildTool.Web",
   "resources": {
-    "hash": "sha256-BbSNl3pppYhH5ZZ9HZjl2j9hVH6bRDve4KZ+fpC3sZ8=",
+    "hash": "sha256-7PS0p9Jsv+kCK4aBvTxU+Vfz88Ssc9REszidNGsw78w=",
     "jsModuleNative": {
       "dotnet.native.8.0.34.l8d8ux50rd.js": "sha256-Uc+HxggmSGuU1CkPjbVFhBiqRQ6cUsH1lnQ1keONjkE="
     },
@@ -12,14 +12,12 @@
       "dotnet.native.wasm": "sha256-Eofly44dOWyqm38tXM2+LqiuBkNn/1PBVC2DqWqZYkI="
     },
     "icu": {
-      "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
-      "icudt_EFIGS.dat": "sha256-8fItetYY8kQ0ww6oxwTLiT3oXlBwHKumbeP2pRF4yTc=",
-      "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
+      "icudt.dat": "sha256-tO5O5YzMTVSaKBboxAqezOQL9ewmupzV2JrB5Rkc8a4="
     },
     "assembly": {
       "CommunityToolkit.Mvvm.wasm": "sha256-VaVp3c0fa3foOOT2u5NvSkgCPvj/BhjxRpwupX1cVuw=",
-      "Division2BuildTool.Core.wasm": "sha256-fCGTCHo7fRftAs5Vm/JOrAKe8q9jE6M7giOYIrid0rg=",
-      "Division2BuildTool.Web.wasm": "sha256-K2rJGH/9lwJcd9OD19aKP8lS41JGrLrKgwP9rEGnv7Q=",
+      "Division2BuildTool.Core.wasm": "sha256-yMN1Vv6ritOuHy2wQpMvEnZwHMJoOUqz6DdeLNV3itA=",
+      "Division2BuildTool.Web.wasm": "sha256-YO6OpSy8FrV8104R0ldwlBNxS++bGXkS8ZcWFT9+9i8=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-HmHSsEW/MDOFkYJXZdMm476EFreVnPFOfQP1iKma0AM=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-beXiD+wiZdzpTiDSPCz5S0s1tCKwps3PPmdzPQCRqSg=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-EzNlX7MjuEqKWHLlAY1tT0ZQCsnSZriQxtxzg5QVRLY=",
@@ -60,7 +58,7 @@
       "System.Private.Xml.wasm": "sha256-hKwkNwNLmRgepUF4e+pCNsN3dow/B1+5EieN6V0nQJE=",
       "System.Runtime.InteropServices.JavaScript.wasm": "sha256-ka+WHZRYoa4bYak7GMzD18QXTD/1ConSc+ALXTP2R24=",
       "System.Runtime.InteropServices.wasm": "sha256-Aoa3Frr/g+LxtalMcIoVYYdfxUzIdD5v47mN1LL5sL8=",
-      "System.Runtime.wasm": "sha256-Pl5slPqrEmXvTvyeYQG+WbGZPAZtVK/lSwtzyoC7fFM=",
+      "System.Runtime.wasm": "sha256-aS98gPqII6BhLl0GI4UVCAfJqW1lNc8KGGrKwkmIzj4=",
       "System.Text.Encoding.CodePages.wasm": "sha256-+Dghmct9KoYAfj0KoeyLrqEEu+ZApjRgTE3LPmhELN8=",
       "System.Text.Encodings.Web.wasm": "sha256-7pKs8RwHYEdw4aesbAyuPADjNhHvbHTC1DkOlZIPtXs=",
       "System.Text.Json.wasm": "sha256-C+zT+lIzTnmh416Ao49PMbkB6/kiEWBE20lu0B4s+yo=",
@@ -74,14 +72,14 @@
     },
     "satelliteResources": {
       "en": {
-        "Division2BuildTool.Core.resources.wasm": "sha256-XllUAx3psAk20D1dxNAp8y6QyZrw9EOcw16K8WEgAFk="
+        "Division2BuildTool.Core.resources.wasm": "sha256-IZH+Km5yJlCt9p2TrTv7WKsHOkN1GQN7btELtIM5/nQ="
       }
     }
   },
   "cacheBootResources": true,
   "debugLevel": 0,
   "linkerEnabled": true,
-  "globalizationMode": "sharded",
+  "globalizationMode": "all",
   "extensions": {
     "blazor": {}
   }
