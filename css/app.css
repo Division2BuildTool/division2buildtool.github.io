@@ -582,7 +582,6 @@ html[data-layout="single"] .side-column {
 
 .item-card:hover {
     border-color: color-mix(in srgb, var(--item-color, #ff6d10) 55%, #2c2c2c);
-    transform: translateY(-1px);
     z-index: 5;
 }
 
@@ -884,6 +883,29 @@ html[data-layout="single"] .side-column {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
+}
+
+/* 与 App 端一致：始终三列（武器普通/具名/奇特，装备品牌/装备组/奇特和具名） */
+.picker-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px 16px 16px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.picker-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.picker-column .picker-name {
+    flex: 1 1 auto;
+    max-width: none;
+    min-width: 0;
 }
 
 .picker-item {
@@ -1334,7 +1356,8 @@ input {
 
 .table-wrap,
 .app-nav,
-.picker-list {
+.picker-list,
+.picker-columns {
     -webkit-overflow-scrolling: touch;
 }
 
@@ -1496,6 +1519,11 @@ input {
     .picker-list {
         padding-left: 12px;
         padding-right: 12px;
+    }
+
+    .picker-columns {
+        gap: 6px;
+        padding: 10px 12px 14px;
     }
 
     .qr-box {
@@ -2633,10 +2661,6 @@ select option {
 }
 
 @media (max-width: 720px) {
-    .calc-buttons {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .build-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -2655,9 +2679,30 @@ select option {
 }
 
 @media (max-width: 720px) {
-    .build-intro {
-        flex-wrap: wrap;
-        row-gap: 8px;
+    /* 窄屏下标题、1/2/3、自动计算、? 保持同一行，标题可被压缩 */
+    .page-intro.build-intro {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        overflow: hidden;
+    }
+
+    .build-intro h1 {
+        flex: 0 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: calc(18px * var(--font-scale));
+        letter-spacing: 1px;
+    }
+
+    .build-intro .weapon-switch,
+    .build-intro .auto-calc-toggle,
+    .build-intro .shortcut-help-btn {
+        flex: none;
     }
 
     .slot-column .build-toolbar select {
@@ -3085,3 +3130,272 @@ select option {
         white-space: nowrap;
     }
 }
+
+/* ===== 参考 App：卡片为整体表格，名称/图片点击更换，卡片只显示一张图片 ===== */
+.item-rows-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 16px;
+}
+
+.card-sheet {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 5px;
+    align-items: center;
+    min-width: 0;
+}
+
+.card-sheet-weapon {
+    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-areas:
+        "name attr1"
+        "figure attr2"
+        "figure attr3"
+        "augment talent";
+}
+
+.card-sheet-gear {
+    grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-areas:
+        "name attr1"
+        "figure attr2"
+        "figure attr3"
+        "talent attr4";
+}
+
+.cell {
+    min-width: 0;
+}
+
+.cell-attr1 { grid-area: attr1; }
+.cell-attr2 { grid-area: attr2; }
+.cell-attr3 { grid-area: attr3; }
+.cell-attr4 { grid-area: attr4; }
+.cell-augment { grid-area: augment; }
+.cell-talent { grid-area: talent; }
+
+.card-name {
+    grid-area: name;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: calc(14px * var(--font-scale));
+    letter-spacing: 0.5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card-name span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-name:hover span {
+    filter: brightness(1.2);
+}
+
+.card-figure {
+    grid-area: figure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.card-figure img {
+    width: 100%;
+    max-height: 46px;
+    object-fit: contain;
+    transition: filter 0.15s ease;
+}
+
+.card-figure:hover img {
+    filter: brightness(1.15);
+}
+
+/* 装备图片半透明，武器图片保持不透明 */
+.item-card-gear .card-figure img {
+    opacity: 0.4;
+    max-height: 58px;
+}
+
+.gear-figure {
+    grid-area: figure;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
+    min-width: 0;
+}
+
+.gear-figure .card-figure {
+    flex: 1 1 auto;
+}
+
+/* 首行/末行贴近卡片上下边缘 */
+.item-card {
+    padding: 4px 10px;
+}
+
+.item-card .item-rows {
+    padding-top: 0;
+}
+
+@media (max-width: 720px) {
+    .card-sheet {
+        grid-template-columns: 56px minmax(0, 1fr);
+        column-gap: 8px;
+    }
+
+    .card-sheet-weapon {
+        grid-template-columns: 78px minmax(0, 1fr);
+    }
+
+    .card-sheet-gear {
+        grid-template-columns: 80px minmax(0, 1fr);
+    }
+
+    .card-name {
+        font-size: calc(12px * var(--font-scale));
+    }
+
+    .card-figure img {
+        max-height: 36px;
+    }
+
+    .item-card-gear .card-figure img {
+        max-height: 46px;
+    }
+}
+
+/* ===== 词条数值：点击数字弹出全屏输入层 ===== */
+.value-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    margin-left: auto;
+}
+
+.row-value-btn {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
+    padding: 2px 0;
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: calc(12px * var(--font-scale));
+    color: var(--accent);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.row-value-btn:hover {
+    filter: brightness(1.25);
+}
+
+.row-value-btn .row-unit {
+    margin-left: 0;
+}
+
+/* 打开输入层时提升卡片层级，保证遮罩盖过导航与相邻卡片 */
+.item-card:has(.value-modal) {
+    z-index: 1000;
+}
+
+.value-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.66);
+    backdrop-filter: blur(2px);
+}
+
+.value-modal-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(320px, 90vw);
+    padding: 16px;
+    background: #1b1b1b;
+    border: 1px solid #4a4a4a;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+}
+
+.value-modal-title {
+    font-size: calc(14px * var(--font-scale));
+    color: var(--text);
+    text-align: center;
+}
+
+.value-modal-range {
+    font-size: calc(12px * var(--font-scale));
+    color: #9a9a9a;
+    text-align: center;
+}
+
+.value-modal-input {
+    width: 100%;
+    padding: 8px 10px;
+    background: #0f0f0f;
+    border: 1px solid #333;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: calc(18px * var(--font-scale));
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.value-modal-input::-webkit-outer-spin-button,
+.value-modal-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.value-modal-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.value-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.value-modal-ok,
+.value-modal-cancel {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: #232323;
+    color: var(--text);
+    font-family: inherit;
+    font-size: calc(12px * var(--font-scale));
+    cursor: pointer;
+}
+
+.value-modal-ok {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #111;
+}
+

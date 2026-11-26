@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Division2BuildTool.Web",
   "resources": {
-    "hash": "sha256-7PS0p9Jsv+kCK4aBvTxU+Vfz88Ssc9REszidNGsw78w=",
+    "hash": "sha256-W8o5rLZVoc9rkjwFIjB+hWCnrfgjl77QDnESwSEFKMY=",
     "jsModuleNative": {
       "dotnet.native.8.0.34.l8d8ux50rd.js": "sha256-Uc+HxggmSGuU1CkPjbVFhBiqRQ6cUsH1lnQ1keONjkE="
     },
@@ -16,10 +16,10 @@
     },
     "assembly": {
       "CommunityToolkit.Mvvm.wasm": "sha256-VaVp3c0fa3foOOT2u5NvSkgCPvj/BhjxRpwupX1cVuw=",
-      "Division2BuildTool.Core.wasm": "sha256-yMN1Vv6ritOuHy2wQpMvEnZwHMJoOUqz6DdeLNV3itA=",
-      "Division2BuildTool.Web.wasm": "sha256-YO6OpSy8FrV8104R0ldwlBNxS++bGXkS8ZcWFT9+9i8=",
-      "Microsoft.AspNetCore.Components.wasm": "sha256-HmHSsEW/MDOFkYJXZdMm476EFreVnPFOfQP1iKma0AM=",
-      "Microsoft.AspNetCore.Components.Web.wasm": "sha256-beXiD+wiZdzpTiDSPCz5S0s1tCKwps3PPmdzPQCRqSg=",
+      "Division2BuildTool.Core.wasm": "sha256-pMvb+dnFxMjtjMmCklWh9gOl9nYlBvmH9boMK26Bd4Q=",
+      "Division2BuildTool.Web.wasm": "sha256-/W7Yj3p1VQE8AoW07Ivvbqr7gfNORIH3y59Sd+Dt7xs=",
+      "Microsoft.AspNetCore.Components.wasm": "sha256-zqlTnK+Uq/UPZZDOgaCSB10KKvaNL/iC2EaLk7TgM2c=",
+      "Microsoft.AspNetCore.Components.Web.wasm": "sha256-XOMbAL8wsj05xrKGTFVIE7y4XQ7i0vjASQdIZD4hytg=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-EzNlX7MjuEqKWHLlAY1tT0ZQCsnSZriQxtxzg5QVRLY=",
       "Microsoft.Extensions.Configuration.Abstractions.wasm": "sha256-87sn2TYqgdZ95sXmavjKEzoEfMgHnYQ9LOvnMX+aZcI=",
       "Microsoft.Extensions.Configuration.Json.wasm": "sha256-/VUEfhgVp9FCU1rXnSNAI1mtW6EO5DpkV/5UNWDR/es=",
@@ -72,7 +72,7 @@
     },
     "satelliteResources": {
       "en": {
-        "Division2BuildTool.Core.resources.wasm": "sha256-IZH+Km5yJlCt9p2TrTv7WKsHOkN1GQN7btELtIM5/nQ="
+        "Division2BuildTool.Core.resources.wasm": "sha256-iB+cOtvDtXqTQ2qNs9vGRFQi1csFB/IuEJYAOzJi914="
       }
     }
   },
